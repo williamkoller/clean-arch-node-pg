@@ -56,5 +56,8 @@
   },
   "_moduleAliases": {
     "@": "dist"
+  },
+  "engines": {
+    "node": "18"
   }
 }
