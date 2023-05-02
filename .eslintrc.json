@@ -3,7 +3,7 @@
     "es2021": true,
     "node": true
   },
-  "extends": "standard-with-typescript",
+  "extends": ["eslint:recommended", "prettier"],
   "parserOptions": {
     "project": "./tsconfig.json",
     "ecmaVersion": 12,
