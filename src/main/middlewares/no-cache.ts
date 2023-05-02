@@ -12,5 +12,6 @@ export const noCache = (
   res.set('pragma', 'no-cache');
   res.set('expires', '0');
   res.set('surrogate-control', 'no-store');
+  res.removeHeader('X-Powered-By')
   next();
 };

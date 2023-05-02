@@ -4,7 +4,7 @@ export const healthPath = {
     summary: 'Health',
     responses: {
       200: {
-        description: 'Sucesso',
+        description: 'Success',
         content: {
           'application/json': {
             schema: {

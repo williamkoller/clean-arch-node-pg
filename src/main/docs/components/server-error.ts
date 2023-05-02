@@ -1,5 +1,5 @@
 export const serverError = {
-  description: 'Problema no servidor',
+  description: 'An error occurred on the server',
   content: {
     'application/json': {
       schema: {

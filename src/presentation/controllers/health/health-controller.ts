@@ -1,4 +1,4 @@
-import { Controller, HttpResponse } from './health-controller-protocols';
+import { Controller, HttpResponse } from '@/presentation/protocols';
 import { ok, serverError } from '@/presentation/helpers/http/http-helper';
 
 export class HealthController implements Controller {

@@ -3,6 +3,7 @@ export const healthSchema = {
   properties: {
     status: {
       type: 'string',
+      example: 'up'
     },
   },
 };

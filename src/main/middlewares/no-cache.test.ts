@@ -2,7 +2,7 @@ import request from 'supertest';
 import { noCache } from './no-cache';
 import app from '@/main/config/app';
 
-describe('NoCahe Middleware', () => {
+describe('NoCache Middleware', () => {
   test('Should disable cache', async () => {
     app.get('/test_no_cache', noCache, (req, res) => {
       res.send();

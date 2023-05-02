@@ -5,6 +5,7 @@
   "main": "src/main/server.ts",
   "author": "williamkoller <williamkoller404@gmail.com>",
   "license": "MIT",
+  "type": "commonjs",
   "private": false,
   "scripts": {
     "start": "node dist/main/server.js",

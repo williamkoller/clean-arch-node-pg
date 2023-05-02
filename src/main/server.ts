@@ -4,8 +4,9 @@ import env from './config/env';
 
 async function bootstrap() {
   const app = (await import('./config/app')).default;
-  app.listen(env.port, () =>
-    console.log(`Server running at http://localhost:${env.port}`)
+  const port = env.port
+  app.listen(port, () =>
+    console.log(`Server running at http://localhost:${port}`)
   );
 }
 
