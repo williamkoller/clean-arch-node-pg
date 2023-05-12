@@ -3,7 +3,10 @@
     "outDir": "./dist",
     "module": "commonjs",
     "target": "es2019",
+    "moduleResolution": "node",
     "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "sourceMap": true,
     "rootDir": "src",
     "baseUrl": "src",
@@ -13,5 +16,5 @@
     "skipLibCheck": true
   },
   "include": ["src"],
-  "exclude": []
+  "exclude": ["node_modules"]
 }

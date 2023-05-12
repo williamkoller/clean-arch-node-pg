@@ -1,4 +1,5 @@
 import { DataSource } from 'typeorm';
+import { join } from 'node:path';
 
 const postgresConfig = {
   host: process.env.DB_HOST,
@@ -13,8 +14,14 @@ export const AppDataSource = new DataSource({
   type: 'postgres',
   synchronize: true,
   logging: false,
-  entities: ['src/infra/database/typeorm/entities/*.entity{.ts,.js}'],
-  migrations: ['src/infra/database/typeorm/migrations/*{.ts,.js}'],
+  entities: [
+    join(__dirname),
+    'src/infra/database/typeorm/entities/*.entity{.ts,.js}',
+  ],
+  migrations: [
+    join(__dirname),
+    'src/infra/database/typeorm/migrations/*{.ts,.js}',
+  ],
   migrationsTableName: 'migrations',
   migrationsRun: true,
   migrationsTransactionMode: 'all',
