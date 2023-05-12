@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  node:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: node
+    entrypoint: sh -c 'yarn install --frozen-lockfile && yarn start:dev'
+    volumes:
+      - .:/app/
+      - /app/node_modules
+    ports:
+      - ${PORT}:${PORT}
+    networks:
+      - node-net
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_HOST: ${DB_HOST}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+      PG_DATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    networks:
+      - node-net
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+networks:
+  node-net:
+
+volumes:
+  postgres-data:

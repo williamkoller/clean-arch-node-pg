@@ -5,7 +5,7 @@ export class HealthController implements Controller {
   async handle(): Promise<HttpResponse> {
     try {
       return ok({ status: 'up' });
-    } catch (error) {
+    } catch (error: any) {
       return serverError(error);
     }
   }
