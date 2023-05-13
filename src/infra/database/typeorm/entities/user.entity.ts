@@ -1,4 +1,5 @@
 import {
+  BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
@@ -7,7 +8,7 @@ import {
 } from 'typeorm';
 
 @Entity('users')
-export class UserEntity {
+export class UserEntity extends BaseEntity {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
@@ -20,16 +21,19 @@ export class UserEntity {
   @Column({ type: 'varchar', nullable: false })
   password: string;
 
+  @Column({ type: 'boolean', nullable: false, default: true })
+  active: boolean;
+
   @CreateDateColumn({
     name: 'created_at',
-    type: 'time with time zone',
+    type: 'timestamp',
     nullable: false,
   })
   createdAt: Date;
 
   @UpdateDateColumn({
     name: 'updated_at',
-    type: 'time with time zone',
+    type: 'timestamp',
     nullable: false,
   })
   updatedAt: Date;

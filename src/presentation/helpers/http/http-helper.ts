@@ -21,7 +21,7 @@ export const serverError = (error: Error): HttpResponse => ({
   body: new ServerError(error.stack),
 });
 
-export const ok = (data: any): HttpResponse => ({
+export const ok = (data: Record<any, any>): HttpResponse => ({
   statusCode: 200,
   body: data,
 });
@@ -29,4 +29,14 @@ export const ok = (data: any): HttpResponse => ({
 export const noContent = (): HttpResponse => ({
   statusCode: 204,
   body: null,
+});
+
+export const create = (data: Record<any, any>): HttpResponse => ({
+  statusCode: 201,
+  body: data,
+});
+
+export const fieldsError = (error: Error): HttpResponse => ({
+  statusCode: 400,
+  body: error,
 });

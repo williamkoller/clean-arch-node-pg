@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import { join } from 'node:path';
+import { UserEntity } from '../entities/user.entity';
 
 const postgresConfig = {
   host: process.env.DB_HOST,
@@ -14,14 +14,7 @@ export const AppDataSource = new DataSource({
   type: 'postgres',
   synchronize: true,
   logging: false,
-  entities: [
-    join(__dirname),
-    'src/infra/database/typeorm/entities/*.entity{.ts,.js}',
-  ],
-  migrations: [
-    join(__dirname),
-    'src/infra/database/typeorm/migrations/*{.ts,.js}',
-  ],
+  entities: [UserEntity],
   migrationsTableName: 'migrations',
   migrationsRun: true,
   migrationsTransactionMode: 'all',

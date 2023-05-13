@@ -10,7 +10,7 @@ async function bootstrap() {
 
   AppDataSource.initialize()
     .then(async () => {
-      console.log('Database up');
+      console.log('Database Connected');
 
       app.listen(port, () =>
         console.log(`Server running at http://localhost:${port}`)

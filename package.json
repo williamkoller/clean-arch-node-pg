@@ -7,8 +7,8 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "build": "rimraf ./dist && tsc -p tsconfig-build.json",
+    "start": "ts-node src/main/server.ts",
+    "build": "rimraf dist && tsc -p tsconfig-build.json",
     "start:dev": "nodemon -r tsconfig-paths/register src/main/server.ts",
     "start:docker": "yarn build && docker-compose down && docker-compose up",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "body-parser": "^1.19.1",
+    "class-validator": "^0.14.0",
     "dotenv": "^16.0.3",
     "express": "^4.17.2",
     "module-alias": "^2.2.2",

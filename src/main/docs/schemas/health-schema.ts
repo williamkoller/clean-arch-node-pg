@@ -1,9 +1,9 @@
 export const healthSchema = {
   type: 'object',
   properties: {
-    status: {
+    message: {
       type: 'string',
-      example: 'up'
+      example: 'up',
     },
   },
 };
