@@ -1,6 +1,6 @@
 import { AddUserDTO } from '@/presentation/dtos/user/add-user.dto';
-import { AppDataSource } from '../config/data-source';
-import { UserEntity } from '../entities/user.entity';
+import { AppDataSource } from '@/infra/database/typeorm/config/data-source';
+import { UserEntity } from '@/infra/database/typeorm/entities/user.entity';
 
 export class UserRepository {
   private repository = AppDataSource.getRepository(UserEntity);
