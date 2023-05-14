@@ -8,12 +8,12 @@ import { AddUserDTO } from '@/presentation/dtos/user/add-user.dto';
 import { EmailInUseError } from '@/presentation/errors/email-in-use-error';
 import { FieldsError } from '@/presentation/errors/fields-error';
 import {
+  badRequest,
   conflictError,
   create,
-  fieldsError,
   serverError,
 } from '@/presentation/helpers/http/http-helper';
-import { validate, validateOrReject } from 'class-validator';
+import { validate } from 'class-validator';
 
 export class AddUserController implements Controller {
   constructor(private readonly addUser: AddUser) {}
@@ -25,11 +25,12 @@ export class AddUserController implements Controller {
       addUserDTO.email = email;
       addUserDTO.password = password;
 
-      await validateOrReject(addUserDTO);
       const errors = await validate(addUserDTO, { whitelist: true });
 
       if (errors.length) {
-        throw new FieldsError('Fields no validated');
+        return badRequest(
+          new FieldsError(errors.map((error) => error.constraints))
+        );
       }
 
       const addUser = await this.addUser.add({ name, email, password });
@@ -40,9 +41,7 @@ export class AddUserController implements Controller {
 
       return create(addUser);
     } catch (error) {
-      if (error.name === 'FieldsError') {
-        return fieldsError(error);
-      }
+      console.log(error);
       return serverError(error);
     }
   }

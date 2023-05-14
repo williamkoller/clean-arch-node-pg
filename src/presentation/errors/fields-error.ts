@@ -1,7 +1,6 @@
 export class FieldsError extends Error {
-  constructor(stack: string) {
-    super('Some of the fields are not correct');
+  constructor(args: Record<string, any>) {
+    super(`${JSON.stringify(args)}`);
     this.name = 'FieldsError';
-    this.stack = stack;
   }
 }
