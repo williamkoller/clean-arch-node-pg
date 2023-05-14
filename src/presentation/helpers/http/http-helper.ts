@@ -40,3 +40,8 @@ export const fieldsError = (error: Error): HttpResponse => ({
   statusCode: 400,
   body: error,
 });
+
+export const conflictError = (error: Error): HttpResponse => ({
+  statusCode: 409,
+  body: error,
+});

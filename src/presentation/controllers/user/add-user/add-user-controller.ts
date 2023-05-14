@@ -1,12 +1,14 @@
-import { UserRepository } from '@/infra/database/typeorm/repositories/user-repository';
+import { AddUser } from '@/domain/usecases/user/add-user';
 import {
   Controller,
   HttpRequest,
   HttpResponse,
 } from '@/presentation/controllers/user/add-user/add-user-controller-protocols';
 import { AddUserDTO } from '@/presentation/dtos/user/add-user.dto';
+import { EmailInUseError } from '@/presentation/errors/email-in-use-error';
 import { FieldsError } from '@/presentation/errors/fields-error';
 import {
+  conflictError,
   create,
   fieldsError,
   serverError,
@@ -14,7 +16,7 @@ import {
 import { validate, validateOrReject } from 'class-validator';
 
 export class AddUserController implements Controller {
-  constructor(private readonly userRepo: UserRepository) {}
+  constructor(private readonly addUser: AddUser) {}
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { name, email, password } = httpRequest.body;
@@ -30,7 +32,12 @@ export class AddUserController implements Controller {
         throw new FieldsError('Fields no validated');
       }
 
-      const addUser = await this.userRepo.add({ name, email, password });
+      const addUser = await this.addUser.add({ name, email, password });
+
+      if (!addUser) {
+        return conflictError(new EmailInUseError());
+      }
+
       return create(addUser);
     } catch (error) {
       if (error.name === 'FieldsError') {
