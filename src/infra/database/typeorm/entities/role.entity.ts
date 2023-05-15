@@ -20,25 +20,31 @@ export class RoleEntity {
   @Column({ type: 'text', array: true, nullable: false })
   permissions: string[];
 
-  @Column({ type: 'int', name: 'user_id', nullable: true })
+  @Column({ type: 'int', name: 'userId', nullable: true })
   userId?: number;
 
   @ManyToOne(() => UserEntity, (user) => user.roles, {
     nullable: true,
     cascade: true,
   })
-  @JoinTable()
+  @JoinTable({
+    name: 'userId',
+    joinColumn: {
+      name: 'user',
+      referencedColumnName: 'id',
+    },
+  })
   user?: UserEntity;
 
   @CreateDateColumn({
-    name: 'created_at',
+    name: 'createdAt',
     type: 'timestamp',
     nullable: false,
   })
   createdAt: Date;
 
   @UpdateDateColumn({
-    name: 'updated_at',
+    name: 'updatedAt',
     type: 'timestamp',
     nullable: false,
   })

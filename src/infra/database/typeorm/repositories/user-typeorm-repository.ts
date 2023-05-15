@@ -4,9 +4,10 @@ import { UserEntity } from '@/infra/database/typeorm/entities/user.entity';
 import { AddUserRepository } from '@/data/protocols/db/user/add-user-repository';
 import { LoadUserByEmailRepository } from '@/data/protocols/db/user/load-user-by-email-repository';
 import { UserModel } from '@/domain/models/user/user';
+import { LoadUsersRepository } from '@/data/protocols/db/user/load-users-repository';
 
 export class UserTypeOrmRepository
-  implements AddUserRepository, LoadUserByEmailRepository
+  implements AddUserRepository, LoadUserByEmailRepository, LoadUsersRepository
 {
   private repository = AppDataSource.getRepository(UserEntity);
   async add(addUserDTO: AddUserDTO): Promise<UserEntity> {
@@ -14,9 +15,9 @@ export class UserTypeOrmRepository
     return await this.repository.save(newUser);
   }
 
-  async loadAll(): Promise<UserEntity[]> {
+  async loadUsers(): Promise<UserEntity[]> {
     const users = await this.repository.find();
-    return users.length ? users : [];
+    return users;
   }
 
   async loadByEmail(email: string): Promise<UserModel> {

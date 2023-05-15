@@ -1,5 +1,5 @@
 import { UserModel } from '@/domain/models/user/user';
 
-export interface LoadUsers {
+export interface LoadUsersRepository {
   loadUsers: () => Promise<UserModel[]>;
 }
