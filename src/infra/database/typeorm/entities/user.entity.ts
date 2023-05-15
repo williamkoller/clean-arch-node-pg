@@ -1,14 +1,17 @@
 import {
-  BaseEntity,
+  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { RoleEntity } from './role.entity';
 
 @Entity('users')
-export class UserEntity extends BaseEntity {
+export class UserEntity {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
@@ -23,6 +26,15 @@ export class UserEntity extends BaseEntity {
 
   @Column({ type: 'boolean', nullable: false, default: true })
   active: boolean;
+
+  @OneToMany(() => RoleEntity, (role) => role.user, { eager: true })
+  @JoinTable()
+  roles: RoleEntity[];
+
+  @BeforeInsert()
+  emailToLowerCase(): void {
+    this.email = this.email.toLowerCase();
+  }
 
   @CreateDateColumn({
     name: 'created_at',

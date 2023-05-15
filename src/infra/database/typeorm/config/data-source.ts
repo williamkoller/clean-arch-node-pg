@@ -1,5 +1,6 @@
 import { DataSource } from 'typeorm';
 import { UserEntity } from '../entities/user.entity';
+import { RoleEntity } from '../entities/role.entity';
 
 const postgresConfig = {
   host: process.env.DB_HOST,
@@ -14,7 +15,7 @@ export const AppDataSource = new DataSource({
   type: 'postgres',
   synchronize: true,
   logging: false,
-  entities: [UserEntity],
+  entities: [UserEntity, RoleEntity],
   migrationsTableName: 'migrations',
   migrationsRun: true,
   migrationsTransactionMode: 'all',

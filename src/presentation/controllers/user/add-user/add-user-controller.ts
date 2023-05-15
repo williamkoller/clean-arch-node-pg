@@ -41,7 +41,6 @@ export class AddUserController implements Controller {
 
       return create(addUser);
     } catch (error) {
-      console.log(error);
       return serverError(error);
     }
   }
