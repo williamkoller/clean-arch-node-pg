@@ -4,7 +4,8 @@ import { BcryptAdapter } from '@/infra/cryptography/bcrypt-adapter/bcrypt-adapte
 import { UserTypeOrmRepository } from '@/infra/database/typeorm/repositories/user-typeorm-repository';
 
 export const makeDbAddUser = (): AddUser => {
-  const bcryptAdapter = new BcryptAdapter();
+  const salt = 12;
+  const bcryptAdapter = new BcryptAdapter(salt);
   const userTypeOrmRepository = new UserTypeOrmRepository();
   return new DbAddUser(
     bcryptAdapter,

@@ -4,7 +4,9 @@ Steps to run this project:
 
 1. Run `yarn install --frozen-lockfile` command
 
-2. Setup `.env`
+2. Setup `copy -r .env.example .env`
+
+Example:
 
 ```bash
 PORT=8124

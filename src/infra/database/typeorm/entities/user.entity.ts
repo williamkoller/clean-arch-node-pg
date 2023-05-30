@@ -31,6 +31,9 @@ export class UserEntity {
   @JoinTable()
   roles: RoleEntity[];
 
+  @Column({ type: 'varchar', nullable: true })
+  token?: string;
+
   @BeforeInsert()
   emailToLowerCase(): void {
     this.email = this.email.toLowerCase();
